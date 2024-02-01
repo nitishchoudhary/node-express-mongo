@@ -23,9 +23,9 @@ app.use(bodyParser.json());
 
 
 
-// app.get('/', (req, res) => {
-//     throw new Error('fake error');
-// });
+app.get('/', (req, res) => {
+    res.send("Node API");
+});
 
 //routes
 app.use('/api/products',productRoutes);
