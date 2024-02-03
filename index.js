@@ -4,6 +4,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const productRoutes = require('./routes/productRoute');
+const userRoutes = require('./routes/authRoute');
 const errorMiddleware = require('./middleware/errorMiddleware');
 const cors = require('cors');
 const app = express();
@@ -29,7 +30,7 @@ app.get('/', (req, res) => {
 
 //routes
 app.use('/api/products',productRoutes);
-
+app.use('/user', userRoutes);
 app.use(errorMiddleware);
 
 mongoose.
