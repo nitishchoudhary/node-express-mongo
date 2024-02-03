@@ -22,7 +22,18 @@ const createUser = asyncHandler(async(req, res) => {
     }
 });
 
+const getUsers = asyncHandler(async(req, res) => {
+    try {
+        const userData = await User.find({});
+        res.status(200).json(userData);
+    } catch (error) {
+        res.status(500);
+        throw new Error(error.message);
+    }
+})
+
 module.exports = {
     getUser,
-    createUser
+    createUser,
+    getUsers
 }
