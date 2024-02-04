@@ -39,12 +39,12 @@ const createUser = asyncHandler(async(req, res) => {
             })
         }
 
-        const hashedPassword = await hashPassword(password);y
+        const hashedPassword = await hashPassword(password);
 
         const userData = await User.create({
             name,
             email,
-            password: hashPassword
+            password: hashedPassword
         });
         res.status(200).json(userData);
     } catch (error) {
