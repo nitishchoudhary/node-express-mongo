@@ -1,6 +1,8 @@
 const { error } = require('console');
 const User = require('../models/userModel');
 const asyncHandler = require('express-async-handler');
+const { hashPassword, comparePassword } = require('../helpers/auth');
+
 
 
 const getUser = asyncHandler(async(req, res) => {
@@ -16,6 +18,7 @@ const getUser = asyncHandler(async(req, res) => {
 const createUser = asyncHandler(async(req, res) => {
     try {
         const {name, email, password} = req.body;
+        console.log(password.length);
         //check name not empty
         if(!name){
             return res.json({
@@ -35,7 +38,14 @@ const createUser = asyncHandler(async(req, res) => {
                 error: 'email is already taken'
             })
         }
-        const userData = await User.create(req.body);
+
+        const hashedPassword = await hashPassword(password);y
+
+        const userData = await User.create({
+            name,
+            email,
+            password: hashPassword
+        });
         res.status(200).json(userData);
     } catch (error) {
         res.status(500);
