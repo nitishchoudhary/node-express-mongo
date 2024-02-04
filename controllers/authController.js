@@ -23,7 +23,7 @@ const createUser = asyncHandler(async(req, res) => {
             })
         }
         //check password 
-        if(!password && password.lenght < 8){
+        if(!password || password.lenght < 8){
             return res.json({
                 error: 'Password is required & lenght should be at least 8 character'
             })
