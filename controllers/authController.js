@@ -7,8 +7,25 @@ const { hashPassword, comparePassword } = require('../helpers/auth');
 
 const getUser = asyncHandler(async(req, res) => {
     try {
-        const userData = await User.findOne();
-        res.status(200).json(userData);
+        const {email, password} = req.body;
+        //check if user exists 
+        const user = await User.findOne({email});
+        if(!user){
+            return res.json({
+                error: 'No user found'
+            })
+        }
+        //check is password is match
+        const match =  await comparePassword(password, user.password);
+        if(!match){
+            return res.json({
+                error: 'Password does not match'
+            })
+        }
+        res.status(200).json({
+            message: 'Password does match'
+        });
+      
     } catch (error) {
         res.status(500);
         throw new Error(error.message);
