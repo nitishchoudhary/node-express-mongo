@@ -10,6 +10,7 @@ const getUser = asyncHandler(async(req, res) => {
         const {email, password} = req.body;
         //check if user exists 
         const user = await User.findOne({email});
+        console.log(user);
         if(!user){
             return res.json({
                 error: 'No user found'
@@ -17,6 +18,7 @@ const getUser = asyncHandler(async(req, res) => {
         }
         //check is password is match
         const match =  await comparePassword(password, user.password);
+        console.log(match);
         if(!match){
             return res.json({
                 error: 'Password does not match'
