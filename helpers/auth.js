@@ -11,7 +11,7 @@ const hashPassword = (password) => {
                 if(err){
                     reject(err);
                 }
-                resolv(hash);
+                resolve(hash);
             })
         })
     })
